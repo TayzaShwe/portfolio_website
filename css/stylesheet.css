@@ -516,6 +516,11 @@ h3 { font-size: var(--fs-h3) }
         margin: 3em 1.5em;
     }
 
+    .project-link-button {
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+    }
+
     .project-links {
         display: grid;
         grid-template-columns: 1fr 0.5fr 1fr;
