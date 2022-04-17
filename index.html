@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="This is my porfolio website">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ea93ade265.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/stylesheet.css">
+    <title>Jonathan's Portfolio Website</title>
+</head>
+<body>
+    <header>
+        <button class="nav-toggle" aria-label="toggle navigation">
+            <span class="hamburger"></span>
+        </button>
+        <nav class="nav-bar">
+            <ul class="nav-list">
+                <li class="nav-item" ><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item" ><a class="nav-link" href="#about-me">About Me</a></li>
+                <li class="nav-item" ><a class="nav-link" href="#trading-bot">Trading Bot</a></li>
+                <li class="nav-item" ><a class="nav-link" href="#pathfinder">Pathfinder</a></li>
+                <li class="nav-item" ><a class="nav-link" href="#project3">Project3</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+
+        <!-- Introduction -->
+        <section class="section-introduction" id="home">
+            <h1 class="section-title section-title-introduction">Hi, I am <strong>Jonathan</strong></h1>
+            <p class="section-subtitle section-subtitle-introduction">Aspiring Software Engineer</p>
+            <img class="section-introduction-img" src="./img/portrait_of_me.png" alt="A picture of Jonathan">
+        </section>
+
+        <!-- About Me -->
+        <section class="section-about-me" id="about-me">
+            <h2 class="section-title section-title-about-me">About Me</h2>
+            <div class="section-body section-body-about-me">
+                <img class="section-about-me-img" src="./img/me_on_a_boat.JPG" alt="A picture of Joanthan on a boat">
+                <p class="section-description section-description-about-me">
+                    My name is Jonathan or Tayza Shwe, and I am currenly a second-year student (on a junior-standing)
+                    at Boston Univeristy, majoring in computer science and minoring in statistics. Originally,
+                    I am from Yangon, Myanmar (#savemyanmar) which is where I grew up before coming to Boston. 
+                    My hobbies include swimming, history, drums, and film. I aspire to be a software engineer,
+                    and currently I am searching for an internship.  
+                </p>    
+            </div>
+            <div class="section-footer section-footer-about-me-resume">
+                <a class="resume" href="./files/Tayza_Shwe_ Resume.pdf" target="_blank">Download resume</a>
+            </div>
+        </section>
+
+        <!-- Trading Bot -->
+        <section class="section-trading-bot" id="trading-bot">
+            <h2 class="section-title section-title-trading-bot">Trading Bot</h2>
+            <h3 class="section-subtitle section-subtitle-trading-bot">Project 1</h3>
+            <div class="section-body section-body-trading-bot">
+                <iframe class="section-video section-video-trading-bot" width="560" height="315" src="https://www.youtube.com/embed/CIaTR6UYMO0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <!--link to youtube video showcasing work-->
+                <p class="section-project-description section-description-trading-bot">
+                    This is a cryptocurrency trading bot I coded in python using the Coinbase API. While trading,
+                    I realized that I missed out on key price movements while I was away from the trading screen. So,
+                    I decided to code a bot that would automate my actions. The bot first sends a market buy order and 
+                    sets a pre-determined sell price below the current price. If the price moves up, the sell price follows
+                    it. If it moves down, the sell price doesn't move. Once the sell price is reached, a market sell order
+                    is sent and a buy price is set close to the sell price. If the price moves down, the buy price moves down 
+                    and if the price moves up, the buy price doesn't move. There is a maximum "gap" between the current price
+                    and the buy price or the sell price that is pre-determined. 
+                </p>
+                <img class="trading-bot-background" src="#" alt="background picture for trading bot">
+                <div class="project-links project-links-trading-bot">
+                    <a class="project-link-button left-button trading-bot-github-link" target="_blank" href="https://github.com/TayzaShwe/crypto_trading_bot_repo">Github</a>
+                    <a class="project-link-button right-button trading-bot-demo-link" target="_blank" href="#">Try Demo</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pathfinder -->
+        <section class="section-pathfinder" id="pathfinder">
+            <h2 class="section-title section-title-pathfinder">Pathfinder</h2>
+            <h3 class="section-subtitle section-subtitle-pathfinder">Project 2</h3>
+            <div class="section-body section-body-pathfinder">
+                <iframe class="section-video section-video-pathfinder" width="560" height="315" src="https://www.youtube.com/embed/CIaTR6UYMO0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <!--link to youtube video showcasing work-->
+                <p class="section-project-description section-description-pathfinder">
+                    Description of Pathfinder 
+                </p>
+                <img class="pathfinder-background" src="#" alt="background picture for pathfinder">
+                <div class="project-links project-links-pathfinder">
+                    <a class="project-link-button left-button pathfinder-github-link" href="#">Github</a> <!--link to github repo-->
+                    <a class="project-link-button right-button pathfinder-demo-link" href="#">Try Demo</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projet3 -->
+        <section class="section-project3" id="project3">
+            <h2 class="section-title section-title-project3">Project 3 Title</h2>
+            <h3 class="section-subtitle section-subtitle-project3">Project 3</h3>
+            <div class="section-body section-body-project3">
+                <iframe class="section-video section-video-project3" width="560" height="315" src="https://www.youtube.com/embed/CIaTR6UYMO0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <!--link to youtube video showcasing work-->
+                <p class="section-project-description section-description-project3">
+                    Description of project3 
+                </p>
+                <img class="project3-background" src="#" alt="background picture for project3">
+                <div class="project-links project-links-trading-bot">
+                    <a class="project-link-button left-button project3-github-link" href="#">Github</a> <!--link to github repo-->
+                    <a class="project-link-button right-button project3-demo-link" href="#">Try Demo</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer>
+        <a href="mailto:jonathanshwe0707@gmail.com" class="footer-email-link">jonathanshwe0707@gmail.com</a>
+        <ul class="social-list">
+            <li class="social-list-item">
+                <a class="social-list-item facebook" href="https://www.facebook.com/profile.php?id=100006375728529"><i class="fa-brands fa-facebook"></i></a></li>
+            <li class="social-list-item">
+                <a class="social-list-item instagram" href="https://www.instagram.com/jnt.shwe/?hl=en"><i class="fa-brands fa-instagram"></i></a></li>
+            <li class="social-list-item">
+                <a class="social-list-item linkedin" href="https://www.linkedin.com/in/tayzashwe/"><i class="fa-brands fa-linkedin"></i></a></li>
+        </ul>
+    </footer>
+    <script src="./js/index.js"></script>
+</body>
+</html>
