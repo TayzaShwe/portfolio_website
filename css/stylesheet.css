@@ -227,9 +227,7 @@ h3 { font-size: var(--fs-h3) }
         padding-bottom: 1em;
         background: var(--clr-dark);
         top: 0;
-        bottom: 91%;
-        right: 0;
-        left: 0;
+        width: 100%
     }
 
     .nav-toggle {
@@ -603,6 +601,8 @@ h3 { font-size: var(--fs-h3) }
     .section-pathfinder,
     .section-project3 {
         padding-top: 10em;
+        padding-bottom: 0em;
+        margin-bottom: 1em;
     }
 
     .section-project3 {
