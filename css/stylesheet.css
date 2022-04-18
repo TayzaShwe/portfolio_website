@@ -240,7 +240,7 @@ h3 { font-size: var(--fs-h3) }
         display: flex;
         justify-content: space-evenly;
         list-style: none;
-        max-width: max(40%, 38em);
+        max-width: max(40%, 45em);
         margin-right: 0;
         margin-left: auto;
     }
@@ -262,7 +262,6 @@ h3 { font-size: var(--fs-h3) }
 
 .section-introduction {
     position: relative;
-    padding-top: 7em;
 }
 
 .section-subtitle-introduction {
@@ -304,13 +303,41 @@ h3 { font-size: var(--fs-h3) }
         z-index: 2;
         box-shadow: var(--bs-black) ;
     }
+
+    .work-list-intro {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 20em;
+        margin: 2.5em auto 1em;
+        padding: 0 0;
+    }
+    .work-list-item-intro {
+        color: rgb(103, 53, 156);
+        list-style: none;
+        text-decoration: none;
+        font-size: var(--fs-h3);
+        transition: all 0.1s ease-in-out 0s;
+        padding: 1em auto;
+    }
+
+    .work-list-item-subtitle {
+        margin: auto auto;
+        font-size: var(--fs-body);
+    }
+
+    .work-list-item-intro:hover {
+        color: var(--clr-accent);
+    }
 }
 
 @media (min-width: 800px) {
     .section-introduction {
+        padding-bottom: 10em;
+    }
+    .introduction-grid-wrapper {
         display: grid;
         width: min-content;
-        margin: 2em auto 10em;
+        margin: 2em auto 3em;
         padding-top: 15em;
         grid-column-gap: 1em;
         grid-template-areas: 
@@ -318,6 +345,7 @@ h3 { font-size: var(--fs-h3) }
             "img subtitle";
         grid-template-columns: min-content max-content;
         text-align: left;
+        padding-top: 10em;
     }
 
     .section-title-introduction {
@@ -340,6 +368,10 @@ h3 { font-size: var(--fs-h3) }
         position: relative;
         z-index: 2;
         box-shadow: var(--bs-black) ;
+    }
+
+    .work-list-intro {
+        max-width: 35em;
     }
 }
 
@@ -374,6 +406,7 @@ h3 { font-size: var(--fs-h3) }
     box-shadow: var(--bs-white);
 }
 
+/*
 .section-footer-about-me-resume {
     margin: 60px auto 0;    
     text-align: center;
@@ -387,6 +420,7 @@ h3 { font-size: var(--fs-h3) }
 .resume:hover {
     color: var(--clr-light)
 }
+*/
 
 @media (min-width: 300px) {
     .section-about-me-img {
@@ -408,7 +442,7 @@ h3 { font-size: var(--fs-h3) }
 }
 @media (min-width: 800px) {
     .section-about-me {
-        padding: 9em 0 150px;
+        padding: 9em 0 12em;
     }
 
     .section-body-about-me {
@@ -571,6 +605,10 @@ h3 { font-size: var(--fs-h3) }
         padding-top: 10em;
     }
 
+    .section-project3 {
+        padding-bottom: 10em;
+    }
+
     .section-title-trading-bot,
     .section-title-pathfinder,
     .section-title-project3 {
@@ -661,20 +699,20 @@ footer {
     color: var(--clr-light)
 }
 
-.social-list {
+.social-list-footer {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     max-width: 20em;
     margin: 1.5em auto 1em;
     padding: 0 0;
 }
-.social-list-item {
+.social-list-item-footer {
     color: var(--clr-accent);
     list-style: none;
     font-size: var(--fs-h3);
     transition: all 0.1s ease-in-out 0s;
 }
 
-.social-list-item:hover {
+.social-list-item-footer:hover {
     color: var(--clr-light);
 }
