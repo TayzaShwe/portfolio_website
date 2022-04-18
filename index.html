@@ -85,14 +85,14 @@
             <div class="section-body section-body-trading-bot">
                 <iframe class="section-video" width="560" height="315" src="https://www.youtube.com/embed/NpEaa2P7qZI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <!--link to youtube video showcasing work-->
                 <p class="section-project-description section-description-trading-bot">
-                    This is a cryptocurrency trading bot I coded in python using the Coinbase API. While trading,
-                    I realized that I missed out on key price movements while I was away from the trading screen. So,
-                    I decided to code a bot that would automate my actions. The bot first sends a market buy order and 
-                    sets a pre-determined sell price below the current price. If the price moves up, the sell price follows
-                    it. If it moves down, the sell price doesn't move. Once the sell price is reached, a market sell order
-                    is sent and a buy price is set close to the sell price. If the price moves down, the buy price moves down 
-                    and if the price moves up, the buy price doesn't move. There is a maximum "gap" between the current price
-                    and the buy price or the sell price that is pre-determined. 
+                    This is a cryptocurrency trading bot I coded in python. I decided to code a bot that would automate my 
+                    actions even when I was away from the trading screen. The bot maintains one sell price or one buy price 
+                    at a given time. The difference between the current price and the buy/sell price never exceeds a 
+                    pre-determined "gap". The bot's performance compared to the the simple buy-and-hold strategy is mixed.
+                    It does well in markets with large movements and does poorly in sideways markets. The loss incurred when 
+                    executing a market order also plays a signficant role. There is a version that uses actual money and one
+                    that uses paper money (fake money). The technologies involved include: Python, Matplotlib, Coinbase Pro API,
+                    and Cryptocompare API
                 </p>
                 <img class="trading-bot-background" src="#" alt="background picture for trading bot">
                 <div class="project-links project-links-trading-bot">
