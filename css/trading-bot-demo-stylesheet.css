@@ -1,0 +1,19 @@
+.container {
+    display: grid;
+    grid-template-columns: 0.2fr 1fr;
+    grid-column-gap: 5em;
+    margin: 5em 3em 0em;
+}
+
+.main-title {
+    text-align: center;
+}
+
+.user-input {
+    align-self: center;
+}
+
+.chart-container {
+    text-align: center; 
+    width: 1300px;
+}
