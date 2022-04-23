@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
-    <script src="../node_modules/chartjs-plugin-zoom/dist/chartjs-plugin-zoom.min.js"></script>
+    <!-- <script src="../node_modules/chartjs-plugin-zoom/dist/chartjs-plugin-zoom.min.js"></script> -->
     <link rel="stylesheet" href="trading-bot-demo-stylesheet.css">
     <title>Trading Bot Demo</title>
 </head>
@@ -41,15 +41,15 @@
                 <label for="time-range-choices">Choose a time range:</label><br>
                 <div class="time-range-day-wrapper">
                     <input name="time-range-choices" class="time-range-day-button" type="radio">
-                    <label class="time-range-day-label" for="time-range-day">Day</label>
+                    <label class="time-range-day-label" for="time-range-day">Day (limit: 1999 days)</label>
                 </div>
                 <div class="time-range-hour-wrapper">
                     <input name="time-range-choices" class="time-range-hour-button" type="radio">
-                    <label class="time-range-hour-label" for="time-range-hour">Hour</label>
+                    <label class="time-range-hour-label" for="time-range-hour">Hour (limit: 83 days)</label>
                 </div>
                 <div class="time-range-minute-wrapper">
                     <input name="time-range-choices" class="time-range-minute-button" type="radio">
-                    <label class="time-range-minute-label" for="time-range-minute">Minute</label>
+                    <label class="time-range-minute-label" for="time-range-minute">Minute (limit: 1 day)</label>
                 </div>
                 <label class="time-range-input-check" for="time-range-input" style="color: red;"></label>
             </div>
@@ -74,7 +74,7 @@
     </div>
     
     
-    <script src="trading-bot-demo-bundle.js"></script>
+    <script src="trading-bot-demo.min.js"></script>
     
 </body>
 </html>

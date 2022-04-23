@@ -6,14 +6,18 @@
  * 3) chart.js: "npm install chart.js"
  * 4) chartjs-plugin-zoom: "npm install chartjs-plugin-zoom"
  */
+
+import { coinList } from "./extra-data.js";
+import { Chart } from 'chart.js';
+import zoomPlugin from 'chartjs-plugin-zoom';
+Chart.register(zoomPlugin);
+
  if (global == undefined) {
   var global = window;
 }
 global.fetch = require('node-fetch');
 const cc = require('cryptocompare');
 cc.setApiKey('76a059bd9813c0c3e678799f86f22cf562bc1f27ac993640c300212678377184'); // this is my api key from cryptocompare, it is free so I don't mind sharing this
-
-import { coinList } from "extra-data.js";
 
 const runToggle = document.querySelector(".run-button");
 var crypto;
@@ -222,7 +226,28 @@ if (!timeRangeDayChecked && !timeRangeHourChecked && !timeRangeMinuteChecked) {
   valid = false;
 }
 else {
-  document.querySelector(".time-range-input-check").innerHTML = "";
+  if (timeRangeDayChecked && difDays>1999) {
+    let errorText = "Excceeds limit";
+    document.querySelector(".from-date-input-check").innerHTML = errorText;
+    document.querySelector(".to-date-input-check").innerHTML = errorText;
+    valid = false
+  }
+  else if (timeRangeHourChecked && difDays>83) {
+    let errorText = "Excceeds limit";
+    document.querySelector(".from-date-input-check").innerHTML = errorText;
+    document.querySelector(".to-date-input-check").innerHTML = errorText;
+    valid = false
+  }
+  else if (timeRangeMinuteChecked && difDays>1) {
+    let errorText = "Excceeds limit";
+    document.querySelector(".from-date-input-check").innerHTML = errorText;
+    document.querySelector(".to-date-input-check").innerHTML = errorText;
+    valid = false
+  }
+  else {
+    document.querySelector(".from-date-input-check").innerHTML = "";
+    document.querySelector(".to-date-input-check").innerHTML = "";
+  }
 }
 return valid
 }
@@ -230,6 +255,7 @@ return valid
 function runTradingBot() {
 return
 }
+
 function getCoinList() {
 return cc.coinList()
     .then(data => {
@@ -245,18 +271,32 @@ return cc.coinList()
       .catch(console.error)
 }
 
+function checkValidCoinPair (result) {
+  if (!result) {
+    document.querySelector(".currency-input-check").innerHTML = "This is not a valid coin pair";
+    document.querySelector(".crypto-input-check").innerHTML = "This is not a valid coin pair";
+    return false;
+  }
+  else {
+    document.querySelector(".currency-input-check").innerHTML = "";
+    document.querySelector(".crypto-input-check").innerHTML = "";
+    return true;
+  }
+}
 
 runToggle.addEventListener('click', async function () {
   //let coinList = await getCoinList();
   //console.log(coinList)
   //document.querySelector("#coinList").innerText = JSON.stringify(coinList);
   getData(); // retrieves input from user
-  let validInput = checkInputValid();
+  let validInput = await checkInputValid();
   if (!validInput) {return}
   console.log(crypto, currency, gap, money, fromDate, toDate, difDays, timeRangeDayChecked, timeRangeHourChecked, timeRangeMinuteChecked, moLossPerc);
   let timePriceList = await getHistPrice(); // retrieves historical data from cryptocompare
+  //if (!checkValidCoinPair(timePriceList)) {return}
   let timeList = timePriceList.map(data => data.time);
   let priceList = timePriceList.map(data => data.price);
+  console.log(priceList.length)
   let initAmt = money/priceList[0];
   let totalValeWithoutBot = priceList.map(price => price*initAmt)
   
