@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
-    <script src="../js/node_modules/chartjs-plugin-zoom/dist/chartjs-plugin-zoom.min.js"></script>
-    <link rel="stylesheet" href="../css/trading-bot-demo-stylesheet.css">
+    <script src="node_modules/chartjs-plugin-zoom/dist/chartjs-plugin-zoom.min.js"></script>
+    <link rel="stylesheet" href="trading-bot-demo-stylesheet.css">
     <title>Trading Bot Demo</title>
 </head>
 <body>
@@ -14,24 +14,28 @@
     <div class="container">
         <div class="user-input">
             <label class="crypto-label" for="crypto-input">Enter cryptocurrency name:</label><br>
-            <input class="crypto-input" type="text" placeholder="eg. BTC" maxlength="10">
+            <input class="crypto-input" type="text" placeholder="eg. BTC" maxlength="10"><br>
+            <label class="crypto-input-check" for="crypto-input" style="color: red;"></label>
             <br><br>
             <label class="currency-label" for="currency-input">Enter currency name:</label><br>
-            <input class="currency-input" type="text" placeholder="eg. USD" maxlength="10">
+            <input class="currency-input" type="text" placeholder="eg. USD" maxlength="10"><br>
+            <label class="currency-input-check" for="currency-input" style="color: red;"></label>
             <br><br>
             <label class="gap-label" for="gap-input">Enter gap:</label><br>
-            <input class="gap-input" type="number" placeholder="eg. 1000">
+            <input class="gap-input" type="number" placeholder="eg. 1000"><br>
+            <label class="gap-input-check" for="gap-input" style="color: red;"></label>
             <br><br>
             <label class="money-label" for="money-input">Enter amount of money to :</label><br>
-            <input class="money-input" type="number" placeholder="eg. 100000">
+            <input class="money-input" type="number" placeholder="eg. 100000"><br>
+            <label class="money-input-check" for="money-input" style="color: red;"></label>
             <br><br>
             <label class="from-date-label" for="from-date-input">Enter starting date:</label><br>
-            <input class="from-date-input" type="date">
-            <label class="from-date-input-check" for="from-date-input" style="color: red;"></label><br>
+            <input class="from-date-input" type="date"><br>
+            <label class="from-date-input-check" for="from-date-input" style="color: red;"></label>
             <br><br>
             <label class="to-date-label" for="to-date-input">Enter ending date:</label><br>
-            <input class="to-date-input" type="date">
-            <label class="to-date-input-check" for="frtoom-date-input" style="color: red;"></label><br>
+            <input class="to-date-input" type="date"><br>
+            <label class="to-date-input-check" for="to-date-input" style="color: red;"></label>
             <br><br>
             <div class="time-range-choices">
                 <label for="time-range-choices">Choose a time range:</label><br>
@@ -47,11 +51,13 @@
                     <input name="time-range-choices" class="time-range-minute-button" type="radio">
                     <label class="time-range-minute-label" for="time-range-minute">Minute</label>
                 </div>
+                <label class="time-range-input-check" for="time-range-input" style="color: red;"></label>
             </div>
-            <br><br>
+            <br>
             <label class="moloss-label" for="moloss-input">Enter market order loss percentage:</label><br>
-            <input class="moloss-input" type="range" min="0" max="100" placeholder="eg. 0.001" value="0" oninput="this.nextElementSibling.value = this.value + '%'">
-            <output class="output-moloss">0%</output>
+            <label class="moloss-label" for="moloss-input">(This value is typically less than 2-5%):</label><br>
+            <input class="moloss-input" type="number" placeholder="eg. 0.001"><br>
+            <label class="moloss-input-check" for="moloss-input" style="color: red;"></label>
             <br><br>
             <button class="run-button" type="button">Run</button>
         </div>
@@ -68,7 +74,7 @@
     </div>
     
     
-    <script src="../js/trading-bot-demo-bundle.js"></script>
+    <script src="trading-bot-demo-bundle.js"></script>
     
 </body>
 </html>
