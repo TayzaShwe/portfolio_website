@@ -8,6 +8,7 @@
  */
 
 import { coinList } from "./extra-data.js";
+import { colors } from "./extra-data.js";
 import { Chart } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
 Chart.register(zoomPlugin);
@@ -20,17 +21,9 @@ const cc = require('cryptocompare');
 cc.setApiKey('76a059bd9813c0c3e678799f86f22cf562bc1f27ac993640c300212678377184'); // this is my api key from cryptocompare, it is free so I don't mind sharing this
 
 const runToggle = document.querySelector(".run-button");
-var crypto;
-var currency;
-var gap;
-var money;
-var fromDate;
-var toDate;
-var timeRangeDayChecked;
-var timeRangeHourChecked;
-var timeRangeMinuteChecked;
-var moLossPerc;
-var difDays; 
+var crypto, currency, gap, money, fromDate, toDate, timeRangeDayChecked, 
+timeRangeHourChecked, timeRangeMinuteChecked, moLossPerc, difDays; 
+
 
 // initializes chart
 var labels = [];
@@ -43,6 +36,7 @@ type: 'line',
 data: data,
 options: {
   responsive: true,
+  maintainAspectRatio: false,
   interaction: {
     mode: 'index',
     intersect: false,
@@ -103,9 +97,6 @@ function getData () {
   timeRangeHourChecked = document.querySelector(".time-range-hour-button").checked;
   timeRangeMinuteChecked = document.querySelector(".time-range-minute-button").checked;
   moLossPerc = Number(document.querySelector(".moloss-input").value);
-  //fromDate = new Date(fromDate[0], fromDate[1]-1, fromDate[2]);
-  //toDate = new Date(toDate[0], toDate[1]-1, toDate[2]);
-  //difDays = (toDate.getTime() - fromDate.getTime())/86400000;
 }
 
 function getHistPrice () {
@@ -247,28 +238,105 @@ else {
   else {
     document.querySelector(".from-date-input-check").innerHTML = "";
     document.querySelector(".to-date-input-check").innerHTML = "";
+    document.querySelector(".time-range-input-check").innerHTML = "";
   }
+}
+if (!moLossPerc) {
+  document.querySelector(".moloss-input-check").innerHTML = "Enter a number/decimal";
+  valid = false;
+}
+else if (moLossPerc>100) {
+  document.querySelector(".moloss-input-check").innerHTML = "Value cannot exceed 100";
+  valid = false;
+}
+else {
+  moLossPerc /= 100;
+  document.querySelector(".moloss-input-check").innerHTML = "";
 }
 return valid
 }
 
-function runTradingBot() {
-return
-}
+function runTradingBot(priceList) {
+  var curCurrencyAmount = money;
+  var totalAssetValue = money;
+  var initAssetAmt, curAssetAmt, curAssetValue = 0.0;
+  var buyPrice, sellPrice = NaN; 
+  var bought, sold = false;
+  var firstOrder = true;
+  var totalValueArr = [];
+  var sellPricesArr = [];
+  var buyPricesArr = [];
+  var totalValueWithoutBotArr = [];
+  var minVal = Number.POSITIVE_INFINITY;
+  var maxVal = Number.NEGATIVE_INFINITY;
 
-function getCoinList() {
-return cc.coinList()
-    .then(data => {
-      return data.Data;
-    })
-    .catch(console.error)
-    .then(data => {
-      let coinList = {};
-      for (const [key, value] of Object.entries(data)) {
-        coinList[`${key}`] = true;
+  // simulates execution of market orders
+  function marketOrder(side, curPrice) {
+    if (side == "buy") {
+      curCurrencyAmount *= (1-moLossPerc);
+      curAssetAmt = curCurrencyAmount/curPrice;
+      curCurrencyAmount = 0;
+      curAssetValue = curAssetAmt*curPrice;
+      totalAssetValue = curCurrencyAmount + curAssetValue;
+    }
+    else if (side == "sell") {
+      curAssetAmt *= (1-moLossPerc);
+      curCurrencyAmount = curAssetAmt*curPrice;
+      curAssetAmt = 0;
+      curAssetValue = 0;
+      totalAssetValue = curCurrencyAmount + curAssetValue
+    }
+  }
+
+  // main trading bot algorithm
+  priceList.forEach((price) => {
+    if (firstOrder) {
+      marketOrder("buy", price);
+      initAssetAmt = curAssetAmt;
+      firstOrder = false;
+      sellPrice = price - gap;
+      bought = true;
+    }
+    else if (bought) {
+      curAssetValue = price*curAssetAmt;
+      totalAssetValue = curCurrencyAmount + curAssetValue;
+      if (price <= sellPrice) {
+        marketOrder("sell", price);
+        buyPrice = sellPrice;
+        sellPrice = NaN;
+        bought = false;
+        sold = true;
       }
-      return coinList})
-      .catch(console.error)
+      else if ((price - sellPrice) > gap) {
+        sellPrice = price - gap
+      }
+    }
+    else if (sold) {
+      if (price >= buyPrice) {
+        marketOrder("buy", price);
+        sellPrice = buyPrice;
+        buyPrice = NaN;
+        bought = true;
+        sold = false;
+      }
+      else if ((buyPrice - price) > gap) {
+        buyPrice = price + gap;
+      }
+    }
+    let curMin = Math.min(price, totalAssetValue, initAssetAmt*price);
+    let curMax = Math.max(price, totalAssetValue, initAssetAmt*price);
+    if (curMin < minVal) {
+      minVal = curMin;
+    }
+    if (curMax > maxVal) {
+      maxVal = curMax;
+    }
+    totalValueWithoutBotArr.push(initAssetAmt*price);
+    totalValueArr.push(totalAssetValue);
+    sellPricesArr.push(sellPrice);
+    buyPricesArr.push(buyPrice);
+  })
+  return [totalValueArr, totalValueWithoutBotArr, sellPricesArr, buyPricesArr, minVal, maxVal];
 }
 
 function checkValidCoinPair (result) {
@@ -284,28 +352,29 @@ function checkValidCoinPair (result) {
   }
 }
 
+// deletes old canvas and replaces it with a new, blank one
+function resetCanvas () {
+  document.querySelector(".chart").remove();
+  document.querySelector(".chart-container").innerHTML = '<canvas class="chart"></canvas>';
+}
+
 runToggle.addEventListener('click', async function () {
-  //let coinList = await getCoinList();
-  //console.log(coinList)
-  //document.querySelector("#coinList").innerText = JSON.stringify(coinList);
   getData(); // retrieves input from user
-  let validInput = await checkInputValid();
-  if (!validInput) {return}
-  console.log(crypto, currency, gap, money, fromDate, toDate, difDays, timeRangeDayChecked, timeRangeHourChecked, timeRangeMinuteChecked, moLossPerc);
+  if (!checkInputValid()) {return}
+  //console.log(typeof(crypto), typeof(currency), typeof(gap), typeof(money), typeof(fromDate), typeof(toDate), typeof(difDays), typeof(timeRangeDayChecked), typeof(timeRangeHourChecked), typeof(timeRangeMinuteChecked), typeof(moLossPerc));
   let timePriceList = await getHistPrice(); // retrieves historical data from cryptocompare
-  //if (!checkValidCoinPair(timePriceList)) {return}
+  if (!checkValidCoinPair(timePriceList)) {return}
   let timeList = timePriceList.map(data => data.time);
   let priceList = timePriceList.map(data => data.price);
-  console.log(priceList.length)
-  let initAmt = money/priceList[0];
-  let totalValeWithoutBot = priceList.map(price => price*initAmt)
-  
 
+  // running trading bot
+  let buyPrices, sellPrices, totalValueWithBot, totalValueWithoutBot, minVal, maxVal;
+  [totalValueWithBot, totalValueWithoutBot, sellPrices, buyPrices, minVal, maxVal] = runTradingBot(priceList);
+  console.log(minVal, maxVal);
 
-  //result = runTradingBot();
-  let noBotProfit;
-  
   // charts data
+  let yAxisMin = minVal*0.66
+  let yAxisMax = maxVal*1.33
   labels = timeList;
   data = {
     labels: labels,
@@ -313,23 +382,48 @@ runToggle.addEventListener('click', async function () {
       {
         label: "Cryptocurrency Price",
         data: priceList,
-        borderColor: 'rgb(66, 135, 245)',
-        backgroundColor: 'rgb(66, 135, 245, 0.5)',
-        yAxisID: 'y',
+        borderColor: colors.yellow,
+        backgroundColor: colors.yellowTp,
+        yAxisID: 'y1',
       },
       {
         label: 'Total Value Without Trading Bot',
-        data: totalValeWithoutBot,
-        borderColor: 'rgb(69, 191, 69)',
-        backgroundColor: 'rgb(69, 191, 69, 0.5)',
-        yAxisID: 'y1',
-      }
+        data: totalValueWithoutBot,
+        borderColor: colors.orange,
+        backgroundColor: colors.orangeTp,
+        yAxisID: 'y2',
+      },
+      {
+        label: 'Total Value With Trading Bot',
+        data: totalValueWithBot,
+        borderColor: colors.purple,
+        backgroundColor: colors.purpleTp,
+        yAxisID: 'y3',
+      },
+      {
+        label: 'Buy Price Orders',
+        data: buyPrices,
+        borderColor: colors.green,
+        backgroundColor: colors.greenTp,
+        yAxisID: 'y4',
+      },
+      {
+        label: 'Sell Price Orders',
+        data: sellPrices,
+        borderColor: colors.red,
+        backgroundColor: colors.redTp,
+        yAxisID: 'y5',
+      },
     ]
   };
   config = {
     type: 'line',
     data: data,
     options: {
+      maintainAspectRatio: false,
+      scales: {
+        display: true,
+      },
       responsive: true,
       interaction: {
         mode: 'index',
@@ -349,19 +443,23 @@ runToggle.addEventListener('click', async function () {
           }
         },
         title: {
-          display: true,
+          display: false,
           text: 'Trading Bot Simulation'
         }
       },
       scales: {
-        y: {
-          type: 'linear',
-          display: true,
-          position: 'left',
-        },
         y1: {
           type: 'linear',
           display: true,
+          min: yAxisMin,
+          max: yAxisMax,
+          position: 'left',
+        },
+        y2: {
+          type: 'linear',
+          display: false,
+          min: yAxisMin,
+          max: yAxisMax,
           position: 'right',
   
           // grid line settings
@@ -369,12 +467,47 @@ runToggle.addEventListener('click', async function () {
             drawOnChartArea: false, // only want the grid lines for one axis to show up
           },
         },
+        y3: {
+          type: 'linear',
+          display: false,
+          min: yAxisMin,
+          max: yAxisMax,
+          position: 'right',
+  
+          // grid line settings
+          grid: {
+            drawOnChartArea: false, // only want the grid lines for one axis to show up
+          },
+        },
+        y4: {
+          type: 'linear',
+          display: false,
+          min: yAxisMin,
+          max: yAxisMax,
+          position: 'right',
+  
+          // grid line settings
+          grid: {
+            drawOnChartArea: false, // only want the grid lines for one axis to show up
+          },
+        },
+        y5: {
+          type: 'linear',
+          display: false,
+          min: yAxisMin,
+          max: yAxisMax,
+          position: 'right',
+  
+          // grid line settings
+          grid: {
+            drawOnChartArea: false, // only want the grid lines for one axis to show up
+          }
+        },
       }
     },
   };
-  // deletes old chart and adds a new <canvas> element 
-  document.querySelector(".chart").remove();
-  document.querySelector(".chart-container").innerHTML = '<canvas class="chart"></canvas>';
+  // deletes old chart and draws new chart
+  resetCanvas();
   myChart = new Chart(
     document.querySelector(".chart"),
     config
@@ -383,7 +516,7 @@ runToggle.addEventListener('click', async function () {
 
 // to reset zoom. Basically recreates the chart
 document.querySelector(".reset-zoom-button").onclick = () => {
-myChart.resetZoom();
+  myChart.resetZoom();
 }
   
 

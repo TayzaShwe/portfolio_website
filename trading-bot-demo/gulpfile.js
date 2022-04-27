@@ -9,10 +9,10 @@ var source = require( 'vinyl-source-stream' );
 var buffer = require( 'vinyl-buffer' )
 
 // main files
-var jsSRC = 'trading-bot-demo.js';
-var jsFolder = 'src/';
-var jsDIST = 'dist/';
-var jsFILES = [jsSRC];
+var jsSRC = 'trading-bot-demo.js'; // main js file
+var jsFolder = 'src/'; // folder the js files are in
+var jsDIST = 'dist/'; // destination/dist folder
+var jsFILES = [jsSRC]; // files to compile
 
 
 function bb() {
