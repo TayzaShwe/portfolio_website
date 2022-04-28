@@ -2,4 +2,4 @@ trading-bot-demo/package.json
 trading-bot-demo/package-lock.json
 trading-bot-demo/gulpfile.js
 trading-bot-demo/src/
-trading-bot-demo/node-modules/
+trading-bot-demo/node_modules/
