@@ -522,7 +522,7 @@ h3 { font-size: var(--fs-h3) }
 }
 
 .project-link-button:hover {
-    background: var(--clr-accent);
+    background: var(--clr-accent); 
 }
 
 .trading-bot-background,
