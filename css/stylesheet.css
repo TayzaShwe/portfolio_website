@@ -512,6 +512,9 @@ h3 { font-size: var(--fs-h3) }
     text-decoration: none;
     border-radius: 10px;
     padding-top: 2.5px;
+    width: max-content;
+    padding-left: 1.2em;
+    padding-right: 1.2em;
 }
 
 .project-link-button:link,
@@ -561,6 +564,10 @@ h3 { font-size: var(--fs-h3) }
         padding: 1em 0;
     }
 
+    .project-links-tic-tac-toe-game {
+        max-width: 17em;
+    }
+
     .right-button {
         grid-column: 3 / 4;
     }
@@ -603,6 +610,10 @@ h3 { font-size: var(--fs-h3) }
         padding-top: 10em;
         padding-bottom: 0em;
         margin-bottom: 1em;
+    }
+
+    .section-tic-tac-toe-game {
+        padding-bottom: 10em;
     }
 
     .section-project3 {
