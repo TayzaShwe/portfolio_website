@@ -471,17 +471,17 @@ h3 { font-size: var(--fs-h3) }
     }
 }
 
-/* Trading bot, Pathfinder, Project3 Layout */
+/* Trading bot, Tic Tac Toe Game, Project3 Layout */
 
 .section-trading-bot,
-.section-pathfinder,
+.section-tic-tac-toe-game,
 .section-project3 {
     margin: 50px auto;
     text-align: center;
 }
 
 .section-title-trading-bot::after,
-.section-title-pathfinder::after,
+.section-title-tic-tac-toe-game::after,
 .section-title-project3::after {
     content: "";
     display: block;
@@ -492,7 +492,7 @@ h3 { font-size: var(--fs-h3) }
 }
 
 .section-subtitle-trading-bot,
-.section-subtitle-pathfinder,
+.section-subtitle-tic-tac-toe-game,
 .section-subtitle-project3 {
     margin-bottom: 50px;
 }
@@ -526,14 +526,14 @@ h3 { font-size: var(--fs-h3) }
 }
 
 .trading-bot-background,
-.pathfinder-background,
+.tic-tac-toe-game-background,
 .project3-background {
     display: none;
 }
 
 @media (min-width: 300px) and (max-width: 800px){
     .section-trading-bot,
-    .section-pathfinder,
+    .section-tic-tac-toe-game,
     .section-project3 {
         margin: 0 auto; 
     }
@@ -568,7 +568,7 @@ h3 { font-size: var(--fs-h3) }
 
 @media (min-width: 800px) and (max-width: 1280px) {
     .section-trading-bot,
-    .section-pathfinder,
+    .section-tic-tac-toe-game,
     .section-project3 {
         margin: 3em auto; 
     }
@@ -598,7 +598,7 @@ h3 { font-size: var(--fs-h3) }
 
 @media (min-width: 1280px) {
     .section-trading-bot,
-    .section-pathfinder,
+    .section-tic-tac-toe-game,
     .section-project3 {
         padding-top: 10em;
         padding-bottom: 0em;
@@ -610,19 +610,19 @@ h3 { font-size: var(--fs-h3) }
     }
 
     .section-title-trading-bot,
-    .section-title-pathfinder,
+    .section-title-tic-tac-toe-game,
     .section-title-project3 {
         margin-bottom: 10px;
     }
 
     .section-subtitle-trading-bot,
-    .section-subtitle-pathfinder,
+    .section-subtitle-tic-tac-toe-game,
     .section-subtitle-project3 {
         margin-bottom: 100px;
     }
 
     .section-body-trading-bot,
-    .section-body-pathfinder,
+    .section-body-tic-tac-toe-game,
     .section-body-project3 {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -664,17 +664,6 @@ h3 { font-size: var(--fs-h3) }
         grid-column: 4 / 5;
     }
 }
-/*
-.section-title-pathfinder::before {
-    content: "";
-    display: block;
-    width: 10em;
-    height: 1px;
-    margin: 0 auto 1em;
-    background: var(--clr-dark);
-    opacity: 0.5;
-}
-*/
 
 /* Footer */
 
