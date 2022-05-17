@@ -2,7 +2,7 @@
 
 This is the official repository for my portfolio website
 
-Website link: https://tayzashwe.github.io/portfolio_website/
+Website [link](https://tayzashwe.github.io/portfolio_website/)
 
 I developed this simple single-page portfolio website to showcase my projects. 
 
