@@ -238,7 +238,7 @@ h3 { font-size: var(--fs-h3) }
         display: flex;
         justify-content: space-evenly;
         list-style: none;
-        max-width: max(40%, 45em);
+        max-width: max(40%, 50em);
         margin-right: 0;
         margin-left: auto;
     }
@@ -471,18 +471,18 @@ h3 { font-size: var(--fs-h3) }
     }
 }
 
-/* Trading bot, Tic Tac Toe Game, Project3 Layout */
+/* Trading bot, Tic Tac Toe Game, Interpreter Layout */
 
 .section-trading-bot,
 .section-tic-tac-toe-game,
-.section-project3 {
+.section-interpreter {
     margin: 50px auto;
     text-align: center;
 }
 
 .section-title-trading-bot::after,
 .section-title-tic-tac-toe-game::after,
-.section-title-project3::after {
+.section-title-interpreter::after {
     content: "";
     display: block;
     width: 2em;
@@ -493,7 +493,7 @@ h3 { font-size: var(--fs-h3) }
 
 .section-subtitle-trading-bot,
 .section-subtitle-tic-tac-toe-game,
-.section-subtitle-project3 {
+.section-subtitle-interpreter {
     margin-bottom: 50px;
 }
 
@@ -511,10 +511,8 @@ h3 { font-size: var(--fs-h3) }
     box-sizing: border-box;
     text-decoration: none;
     border-radius: 10px;
-    padding-top: 2.5px;
+    padding: 0.2em 1.2em;
     width: max-content;
-    padding-left: 1.2em;
-    padding-right: 1.2em;
 }
 
 .project-link-button:link,
@@ -530,14 +528,14 @@ h3 { font-size: var(--fs-h3) }
 
 .trading-bot-background,
 .tic-tac-toe-game-background,
-.project3-background {
+.interpreter-background {
     display: none;
 }
 
 @media (min-width: 300px) and (max-width: 800px){
     .section-trading-bot,
     .section-tic-tac-toe-game,
-    .section-project3 {
+    .section-interpreter {
         margin: 0 auto; 
     }
 
@@ -564,6 +562,10 @@ h3 { font-size: var(--fs-h3) }
         padding: 1em 0;
     }
 
+    .project-links-interpreter {
+        display: block;
+    }
+
     .project-links-tic-tac-toe-game {
         max-width: 17em;
     }
@@ -576,7 +578,7 @@ h3 { font-size: var(--fs-h3) }
 @media (min-width: 800px) and (max-width: 1280px) {
     .section-trading-bot,
     .section-tic-tac-toe-game,
-    .section-project3 {
+    .section-interpreter {
         margin: 3em auto; 
     }
 
@@ -598,6 +600,10 @@ h3 { font-size: var(--fs-h3) }
         margin: 0 auto;
     }
 
+    .project-links-interpreter {
+        display: block;
+    }
+
     .right-button {
         grid-column: 3 / 4;
     }
@@ -606,35 +612,31 @@ h3 { font-size: var(--fs-h3) }
 @media (min-width: 1280px) {
     .section-trading-bot,
     .section-tic-tac-toe-game,
-    .section-project3 {
+    .section-interpreter {
         padding-top: 10em;
         padding-bottom: 0em;
         margin-bottom: 1em;
     }
 
-    .section-tic-tac-toe-game {
-        padding-bottom: 10em;
-    }
-
-    .section-project3 {
+    .section-interpreter {
         padding-bottom: 10em;
     }
 
     .section-title-trading-bot,
     .section-title-tic-tac-toe-game,
-    .section-title-project3 {
+    .section-title-interpreter {
         margin-bottom: 10px;
     }
 
     .section-subtitle-trading-bot,
     .section-subtitle-tic-tac-toe-game,
-    .section-subtitle-project3 {
+    .section-subtitle-interpreter {
         margin-bottom: 100px;
     }
 
     .section-body-trading-bot,
     .section-body-tic-tac-toe-game,
-    .section-body-project3 {
+    .section-body-interpreter {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-gap: 2em 3em;
@@ -661,6 +663,10 @@ h3 { font-size: var(--fs-h3) }
         grid-template-columns: 0.75fr 1fr 0.5fr 1fr 1fr;
         grid-column: 2 / 3;
         margin-left: 0;
+    }
+
+    .project-links-interpreter {
+        display: block;
     }
 
     .project-link-button {
