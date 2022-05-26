@@ -132,7 +132,14 @@
             <div class="section-body section-body-interpreter">
                 <iframe class="section-video" width="560" height="315" src="https://www.youtube.com/embed/NpEaa2P7qZI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <p class="section-project-description section-description-interpreter">
-                    This is an interpreter I coded using <b>Ocaml</b>. Although this is a course project
+                    This is an interpreter I coded using <b>Ocaml</b>. In this course project, I learned to use many of Ocaml's features such as 
+                    pattern matching and abstract types to build parsers which was then used to build the interpreter. The program functions as a stack
+                    where commands are given to the stack to do various things. These things include pushing and popping constants,
+                    adding, subtracting, multiplying, and dividing integers, checking for equality and inequalities, using conditional statments,
+                    providing functions with closures, using try statements, and using switch statements. For example "Push 1 Push 2 Add 2" would consume the previous two constants,
+                    and push 3. Only 3 is left in the stack. After a string of commands are provided, the interpreter returns an array of results. 
+                    If a command's syntax is wrong or the usage of the command is wrong, an "error" is added to the array.  
+
                 </p>
                 <img class="interpreter-background" src="#" alt="background picture for interpreter">
                 <div class="project-links project-links-interpreter">
